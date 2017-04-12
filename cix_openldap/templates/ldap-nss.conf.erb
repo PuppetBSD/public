@@ -1,0 +1,27 @@
+URI ldap://127.0.0.1
+base <%= @ldap_suffix %>
+ldap_version 3
+scope sub
+bind_timelimit 3
+bind_policy soft
+timelimit 3
+idle_timelimit 3
+
+pam_password SSHA
+
+pam_filter              objectclass=posixAccount
+pam_check_host_attr     yes
+pam_login_attribute     uid:caseExactMatch:
+pam_member_attribute    memberUid
+
+pam_lookup_policy no
+
+nss_reconnect_tried     2
+pam_login_attributes    uid
+pam_member_attributes   cn
+pam_password    SSHA
+nss_base_passwd ou=People,<%= @ldap_suffix %>
+nss_base_shadow ou=People,<%= @ldap_suffix %>
+
+TIMEOUT 3
+TIMELIMIT       3

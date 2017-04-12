@@ -1,0 +1,2 @@
+git@github.com:olevole/puppet-openldap.git
+

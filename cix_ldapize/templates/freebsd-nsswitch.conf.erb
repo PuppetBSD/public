@@ -1,0 +1,21 @@
+#
+# nsswitch.conf(5) - name service switch configuration file
+# $FreeBSD: head/etc/nsswitch.conf 301711 2016-06-09 01:28:44Z markj $
+#
+<% if @ldapize -%>
+group: cache [success=return notfound=continue unavail=continue tryagain=continue] files ldap
+<%- else -%>
+group: cache [success=return notfound=continue unavail=continue tryagain=continue] files
+<% end -%>
+hosts: cache [success=return notfound=continue unavail=continue tryagain=continue] files dns
+netgroup: compat
+networks: cache [success=return notfound=continue unavail=continue tryagain=continue] files
+<% if @ldapize -%>
+passwd: cache [success=return notfound=continue unavail=continue tryagain=continue] files ldap
+<%- else -%>
+passwd: cache [success=return notfound=continue unavail=continue tryagain=continue] files
+<% end -%>
+shells: files
+services: cache [success=return notfound=continue unavail=continue tryagain=continue] files
+protocols: cache [success=return notfound=continue unavail=continue tryagain=continue] files
+rpc: cache files

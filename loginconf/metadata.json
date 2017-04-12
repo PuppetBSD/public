@@ -1,0 +1,15 @@
+{
+  "name": "puppet-loginconf",
+  "version": "0.1.0",
+  "author": "olevole",
+  "summary": "Puppet module for configuring /etc/login.conf content on FreeBSD",
+  "license": "BSD",
+  "source": "git@github.com:olevole/puppet-loginconf.git",
+  "project_page": null,
+  "issues_url": null,
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ],
+  "data_provider": null
+}
+

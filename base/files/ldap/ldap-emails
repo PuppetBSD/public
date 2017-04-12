@@ -1,0 +1,7 @@
+#!/bin/sh
+# get mail attribute for $1 uid
+uid=$1
+[ -z "${uid}" ] && exit 1
+
+ldapsearch -w iequighaiMehah0ooxoh -D cn=readonly,dc=mobbtech,dc=com -LLL -H ldap://ldap.mobbtech.com/ -b dc=mobbtech,dc=com "(&(objectClass=posixAccount)(uid=${uid}))" mail |awk '/^mail: /{printf $2"\n"}'
+

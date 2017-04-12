@@ -1,0 +1,21 @@
+#!/bin/sh
+# DISKNUM=<%= @dsk.split(',').length %>
+<%-
+disknum = 0
+disknum = @dsk.split(',').length
+-%>
+
+mkdir /tmp/mnt
+
+<%- if disknum.to_i > 2 -%>
+echo "Only single disk or mirror (two disk) installation supported"
+exit 1 
+<%- end -%>
+
+<%- if disknum.to_i == 1 -%>
+cbsd zfsinstall devs="<%= @dsk %>" mnt=/tmp/mnt pool=clonos ext_populate=/root/popul.sh
+<%- end -%>
+
+<%- if disknum.to_i == 2 -%>
+cbsd zfsinstall devs="<%= @dsk %>" raid=mirror mnt=/tmp/mnt pool=clonos ext_populate=/root/popul.sh
+<%- end -%>

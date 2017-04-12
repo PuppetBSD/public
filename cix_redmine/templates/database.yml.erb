@@ -1,0 +1,9 @@
+# This file managed by Puppet
+# from cix_redmine module
+production:
+  adapter: mysql2
+  database: <%= @redmine_db %>
+  host: 127.0.0.1
+  username: <%= @redmine_db_user %>
+  password: <%= @redmine_db_password %>
+  encoding: utf8

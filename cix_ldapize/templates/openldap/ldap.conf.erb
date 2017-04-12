@@ -1,0 +1,35 @@
+#
+# LDAP Defaults
+#
+
+# See ldap.conf(5) for details
+# This file should be world readable but not world writable.
+
+#BASE	dc=example,dc=com
+#URI	ldap://ldap.example.com ldap://ldap-master.example.com:666
+
+#SIZELIMIT	12
+#TIMELIMIT	15
+#DEREF		never
+
+nss_reconnect_tried     2
+pam_login_attributes    uid
+pam_member_attributes   cn
+pam_password            SSHA
+<% if @ldap_ou -%>
+nss_base_group <%= @ldap_ou %>,<%= @ldap_suffix %>
+nss_base_netgroup <%= @ldap_ou %>,<%= @ldap_suffix %>
+<% else -%>
+nss_base_group <%= @ldap_suffix %>
+nss_base_netgroup <%= @ldap_suffix %>
+<% end -%>
+
+TIMEOUT	3
+TIMELIMIT	3
+
+<% if @ldap_bind_id -%>
+binddn <%= @ldap_bind_id %>
+<% end -%>
+<% if @ldap_bind_password -%>
+bindpw <%= @ldap_bind_password %>
+<% end -%>

@@ -1,0 +1,20 @@
+uri ldap://<%= @ldap_host %>
+<% if @ldap_ou -%>
+base <%= @ldap_ou %>,<%= @ldap_suffix %>
+<% else -%>
+base <%= @ldap_suffix %>
+<% end -%>
+
+ldap_version 3
+
+timelimit 3
+bind_timelimit 3
+bind_policy soft
+idle_timelimit 3
+
+<% if @ldap_bind_id -%>
+binddn <%= @ldap_bind_id %>
+<% end -%>
+<% if @ldap_bind_password -%>
+bindpw <%= @ldap_bind_password %>
+<% end -%>

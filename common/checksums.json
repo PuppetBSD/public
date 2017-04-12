@@ -1,0 +1,23 @@
+{
+  "CHANGELOG": "9d9dbf369b52edf7b6264fa51e59ed2e",
+  "Gemfile": "312781b187b0112a0c77990b37570f5f",
+  "LICENSE": "a0a5592752d4298166fd5b7f01de270c",
+  "README.md": "8c5408dad2bea307610e131a7ab97bcb",
+  "Rakefile": "d1058c019a7a2aeb70bea060938f6cc9",
+  "lib/puppet/parser/functions/interface2factname.rb": "fb5ab2ed1ffe64de903a34b337a4102d",
+  "lib/puppet/parser/functions/strip_file_extension.rb": "7b9d678e8346e044ab05f208e602ffb0",
+  "manifests/init.pp": "4f5b33941d784c1ce1e923e404032e8b",
+  "manifests/mkdir_p.pp": "cb3b9916ad43f66b8734249323bffc87",
+  "manifests/mkuser.pp": "9fc6efd43db737f6f6f2cf837cdfc315",
+  "manifests/remove_if_empty.pp": "305f39a2cc3bd2653cb8ca6520e31788",
+  "metadata.json": "c8b8b4dee2bb6c50bf6d808e8693665e",
+  "spec/classes/init_spec.rb": "25be7248db2412adf4f5b1b9fb968251",
+  "spec/classes/mkuser_use_cases_spec.rb": "7201f2bec9cdac5826b285241140da5b",
+  "spec/defines/mkdir_p_spec.rb": "3a6b8db7f2860eefbf31ef22400ea84a",
+  "spec/defines/mkuser_spec.rb": "ef559e115a2211b9603aa9a2b6f35d0d",
+  "spec/defines/remove_if_empty_spec.rb": "6e18465a4f78263d4ca47c04f41497ef",
+  "spec/functions/interface2factname_spec.rb": "afee2b300871c5ead9e5bddb55bfa9b6",
+  "spec/functions/strip_file_extension_spec.rb": "58809e0c56e0e8237c9010d306081831",
+  "spec/spec_helper.rb": "c0df271f4a57ed230265fa51c86e993b",
+  "tests/init.pp": "c1c9f68a35b8bd5a6147341c0eed884b"
+}

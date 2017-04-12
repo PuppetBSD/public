@@ -1,0 +1,21 @@
+[Unit]
+Description=Teamcity master service
+
+[Service]
+Restart=on-failure
+StartLimitInterval=20
+StartLimitBurst=5
+TimeoutStartSec=0
+User=teamcity
+Environment="HOME=/var/lib/teamcity"
+Environment="TEAMCITY_HOME=/var/lib/teamcity"
+Environment="TEAMCITY_LOGS=/opt/teamcity/logs"
+Environment="TEAMCITY_DATA_PATH=/var/lib/teamcity"
+
+ExecStartPre=-<%= @kill_command %>
+ExecStart=<%= @start_command %>
+
+ExecStop=-<%= @stop_command %>
+
+[Install]
+WantedBy=multi-user.target

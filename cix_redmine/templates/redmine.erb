@@ -1,0 +1,40 @@
+#!/bin/sh
+
+# $FreeBSD: head/www/redmine/files/redmine.in 430440 2017-01-03 05:32:37Z swills $
+
+# PROVIDE: redmine
+# REQUIRE: LOGIN mysql
+# KEYWORD: shutdown
+
+# Add the following line to /etc/rc.conf[.local] to enable redmine
+#
+# redmine_enable (bool):        Set to "NO" by default.
+#                               Set it to "YES" to enable redmine.
+# redmine_flags (str):          Custom additional arguments to be passed
+#                               to redmine.
+# redmine_user (str):		User account to run thin with. (default: www)
+# redmine_group (str):		Group to run thin with. (default: www)
+
+. /etc/rc.subr
+
+name="redmine"
+rcvar=redmine_enable
+command=ruby23
+
+pidfile="/usr/local/www/redmine/tmp/pids/thin.pid"
+
+load_rc_config $name
+
+# add /usr/local/bin to path
+export PATH=$PATH:/usr/local/bin
+
+# set defaults
+: ${redmine_enable="NO"}
+: ${redmine_flags="-a 0.0.0.0 -p 3000 -e production"}
+: ${redmine_user="www"}
+: ${redmine_group="www"}
+
+command_args="-d -l /tmp/thin.log -D -c /usr/local/www/redmine -u ${redmine_user} -g ${redmine_group}"
+start_cmd="/usr/local/bin/thin ${command_args} ${redmine_flags} start"
+
+run_rc_command "$1"

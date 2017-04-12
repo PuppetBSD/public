@@ -1,0 +1,2 @@
+git://github.com/xaque208/puppet-pkgng.git
+

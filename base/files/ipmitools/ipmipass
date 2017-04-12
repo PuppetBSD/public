@@ -1,0 +1,28 @@
+#!/bin/sh
+
+PASSWORD="tahp0thuiYeequ8Rahlo"
+MAILTO="oleg@devim.team"
+
+modprobe ipmi_devintf
+modprobe ipmi_si
+
+_msg=$( ipmitool -v user list 1 2>/dev/null|egrep -e 'OPERATOR$|ADMINISTRATOR$' |tr "\t" " " | tr -s " "| while read id name nop; do
+	[ -z "${name}" -o -z "${id}" ] && continue
+	case "${name}" in
+		root|ADMIN)
+			echo "Password for ID $id ( $name ) has been changed;"
+			ipmitool -v user set password ${id} ${PASSWORD} > /dev/null 2>&1
+			ipmitool user enable ${id} > /dev/null 2>&1
+			;;
+		*)
+			echo "Account for ID $id ( $name ) has been disabled;"
+			ipmitool user disable ${id} > /dev/null 2>&1
+			;;
+	esac
+done )
+
+if [ -n "${_msg}" ]; then
+	hostname=$( hostname )
+	echo ${_msg} |mail -s "IPMI auth changed on $hostname" ${MAILTO}
+	/root/bin/notify-by-slack.sh "IPMI auth changed $hostname"
+fi

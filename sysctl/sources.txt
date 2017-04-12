@@ -1,0 +1,2 @@
+https://github.com/PuppetBSD/augeasproviders_sysctl.git
+

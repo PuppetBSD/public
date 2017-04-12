@@ -1,0 +1,21 @@
+{
+  "LICENSE": "258cce07c8071ef19db4749c806413f5",
+  "README.md": "9da65e57f9dcf38f7bc38c9828fb34d7",
+  "Rakefile": "1ed4907e608b903559cd524bd6cef036",
+  "manifests/agent/sudo.pp": "8b34f83073ec90fe9e65638383a7b89d",
+  "manifests/agent.pp": "285305bd1238be358e9cee488e25b523",
+  "manifests/config.pp": "44665c01708764f960d4878d5a7e75f4",
+  "manifests/db/config.pp": "970212049c2edcf66faa2d7fa547fcc4",
+  "manifests/db/install.pp": "26dac1834b704111c9489d0224db39e0",
+  "manifests/install.pp": "92e488cf0bd435d358e8c304bda3ced6",
+  "manifests/master.pp": "b48a8289d039c324a807f05a78399db5",
+  "manifests/params.pp": "e0e78eb7891848fccabd377af0aa384f",
+  "manifests/prepare.pp": "b404e9062833419e93409c5e288dd153",
+  "manifests/service_master.pp": "b2b639348a4bd3749e66424cea8f7f13",
+  "metadata.json": "685d4b20c1a540a9d465ee477f5298f1",
+  "spec/classes/teamcity_master_spec.rb": "daab8988a67f864efb3a849b0c248591",
+  "spec/defines/teamcity_agent_spec.rb": "0e9b20406bfb29f69a8c6b19787c4295",
+  "spec/spec_helper.rb": "3ea886dd135e120afa31e0aab12e85b0",
+  "templates/postgresql.database.properties.erb": "8d9abaa651e08807849ac6f5ebd0ae37",
+  "templates/systemd_teamcity.service.erb": "24edfda7d76bff7b97968520076b3a8a"
+}

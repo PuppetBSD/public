@@ -1,0 +1,4 @@
+git@github.com:olevole/puppet-redis-1.git
+
+Issue from upstream: https://github.com/arioch/puppet-redis/pull/98
+

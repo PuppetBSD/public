@@ -1,0 +1,111 @@
+<beans
+  xmlns="http://www.springframework.org/schema/beans"
+  xmlns:amq="http://activemq.apache.org/schema/core"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+  http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd
+  http://activemq.apache.org/camel/schema/spring http://activemq.apache.org/camel/schema/spring/camel-spring.xsd">
+
+<% if @webconsole_real -%>
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <value>file:${activemq.base}/conf/credentials.properties</value>
+        </property>
+    </bean>
+
+<% end -%>
+    <broker xmlns="http://activemq.apache.org/schema/core" brokerName="<%= @mq_broker_name %>" useJmx="true">
+        <managementContext>
+            <managementContext createConnector="false"/>
+        </managementContext>
+
+<% if @mq_cluster_brokers_real.length > 1 -%>
+        <!--
+          Configure network connectors for a network of brokers. 
+          In this config, all brokers are connected to each other.
+        -->
+        <networkConnectors>
+  <%- @mq_cluster_brokers_real.each do |broker| -%>
+    <%- if broker != mq_broker_name -%>
+          <networkConnector
+                name="<%= @mq_broker_name %>-<%= broker %>-topics"
+                uri="static:(tcp://<%= broker %>:61616)"
+                userName="<%= @mq_cluster_username_real %>"
+                password="<%= @mq_cluster_password_real %>"
+                duplex="false"
+                decreaseNetworkConsumerPriority="true"
+                networkTTL="2"
+                dynamicOnly="true">
+                <excludedDestinations>
+                        <queue physicalName=">" />
+                </excludedDestinations>
+          </networkConnector>
+          <networkConnector
+                name="<%= @mq_broker_name %>-<%= broker %>-queues"
+                uri="static:(tcp://<%= broker %>:61616)"
+                userName="<%= @mq_cluster_username_real %>"
+                password="<%= @mq_cluster_password_real %>"
+                duplex="false"
+                decreaseNetworkConsumerPriority="true"
+                networkTTL="2"
+                dynamicOnly="true"
+                conduitSubscriptions="false">
+                <excludedDestinations>
+                        <topic physicalName=">" />
+                </excludedDestinations>
+          </networkConnector>
+    <%- end -%>
+  <%- end -%>
+        </networkConnectors>
+<%- end -%>
+
+        <plugins>
+          <statisticsBrokerPlugin/>
+          <simpleAuthenticationPlugin>
+            <users>
+<% if @mq_cluster_brokers_real.length > 1 -%>
+              <authenticationUser username="<%= @mq_cluster_username_real %>" password="<%= @mq_cluster_password_real %>" groups="admins,everyone"/>
+<% end -%>
+              <authenticationUser username="mcollective" password="marionette" groups="mcollective,everyone"/>
+              <authenticationUser username="<%= @mq_admin_username_real %>" password="<%= @mq_admin_password_real %>" groups="mcollective,admins,everyone"/>
+            </users>
+          </simpleAuthenticationPlugin>
+          <authorizationPlugin>
+            <map>
+              <authorizationMap>
+                <authorizationEntries>
+                  <authorizationEntry queue=">" write="admins" read="admins" admin="admins" />
+                  <authorizationEntry topic=">" write="admins" read="admins" admin="admins" />
+                  <authorizationEntry topic="mcollective.>" write="mcollective" read="mcollective" admin="mcollective" />
+                  <authorizationEntry queue="mcollective.>" write="mcollective" read="mcollective" admin="mcollective" />
+                  <authorizationEntry topic="ActiveMQ.Advisory.>" read="everyone" write="everyone" admin="everyone"/>
+                </authorizationEntries>
+              </authorizationMap>
+            </map>
+          </authorizationPlugin>
+        </plugins>
+
+        <systemUsage>
+            <systemUsage>
+                <memoryUsage>
+                    <memoryUsage limit="20 mb"/>
+                </memoryUsage>
+                <storeUsage>
+                    <storeUsage limit="1 gb" name="foo"/>
+                </storeUsage>
+                <tempUsage>
+                    <tempUsage limit="100 mb"/>
+                </tempUsage>
+            </systemUsage>
+        </systemUsage>
+
+        <transportConnectors>
+            <transportConnector name="openwire" uri="tcp://0.0.0.0:61616"/>
+            <transportConnector name="stomp+nio" uri="stomp://0.0.0.0:61613"/>
+        </transportConnectors>
+    </broker>
+
+<% if @webconsole_real -%>
+      <import resource="jetty.xml"/>
+<% end -%>
+</beans>

@@ -1,0 +1,43 @@
+1.0.1
+=====
+
+Features:
+- Support for setting of max. no. files on Linux
+
+1.0.0
+=====
+
+Fixes:
+- All the things
+
+0.1.7
+=====
+
+Features:
+- Service parameters
+- Tests for puppet 3.6
+- Workaround for bug in newer apt-cacher-ng package
+
+0.1.6
+=====
+
+Features:
+- Tests and puppet documentation
+
+0.1.5
+=====
+
+Features:
+- Support management of security.conf
+
+0.1.4
+=====
+
+Fixes:
+- Puppet 3.4 compatibility fix
+
+0.1.3
+=====
+
+Features:
+- Create (or ensure existance of) `CacheDir` and `LogDir`.

@@ -1,0 +1,39 @@
+{
+  "name": "markhellewell-aptcacherng",
+  "version": "1.0.1",
+  "author": "markhellewell",
+  "summary": "Install and configure an apt-cacher-ng server.",
+  "license": "BSD-2-Clause",
+  "source": "git@github.com:markhellewell/puppet-aptcacherng.git",
+  "project_page": "https://github.com/markhellewell/puppet-aptcacherng",
+  "issues_url": "https://github.com/markhellewell/puppet-aptcacherng/issues",
+  "dependencies": [
+  
+  ],
+  "data_provider": null,
+  "description": "The aptcacherng module permits management of\n    an apt-cacher-ng caching proxy service.",
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "14.04",
+        "12.04",
+        "10.04"
+      ]
+    },
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "8",
+        "7",
+        "6"
+      ]
+    }
+  ],
+  "tags": [
+    "apt",
+    "packaging",
+    "cache",
+    "apt-cacher-ng"
+  ]
+}

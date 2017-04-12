@@ -1,0 +1,8 @@
+uri ldap://127.0.0.1
+base ou=People,<%= @ldap_suffix %>
+ldap_version 3
+
+timelimit 3
+bind_timelimit 3
+bind_policy soft
+idle_timelimit 3

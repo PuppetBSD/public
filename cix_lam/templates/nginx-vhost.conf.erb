@@ -1,0 +1,23 @@
+server {
+	listen *:80;
+	access_log /dev/null;
+	error_log /dev/null;
+
+	root   /usr/local/www/lam;
+	set $php_root $document_root;
+
+	autoindex off;
+
+	location ~ \.php$ {
+		fastcgi_split_path_info ^(.+\.php)(/.+)$;
+#		fastcgi_pass unix:/tmp/php-fpm.sock;
+#		fastcgi_index index.php;
+#		include fastcgi_params;
+		include php-core.conf;
+	}
+
+	location ~ /lam/(tmp/internal|sess|config|lib|help|locale) {
+		deny all;
+		return 403;
+	}
+}

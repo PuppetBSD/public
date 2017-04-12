@@ -1,0 +1,17 @@
+.blimpy.d
+.bundle
+doc/
+Gemfile.lock
+log/
+pkg/*
+.project
+README.pdf
+.ruby-*
+.rvmrc
+spec/fixtures
+*.sw*
+/test_reports
+tmp/*
+.vagrant
+.vagrant*
+.yardoc

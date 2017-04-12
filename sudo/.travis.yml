@@ -1,0 +1,20 @@
+---
+branches:
+  only:
+    - master
+language: ruby
+before_install: 'bundle install'
+bundler_args: --without development
+script: 'bundle exec rake validate && bundle exec rake lint && SPEC_OPTS="--format documentation" bundle exec rake spec'
+rvm:
+  - 1.9.3
+  - 2.0.0
+gemfile: Gemfile
+env:
+  matrix:
+    - PUPPET_GEM_VERSION="~> 2.7.0"
+    - PUPPET_GEM_VERSION="~> 3.0.0"
+    - PUPPET_GEM_VERSION="~> 3.3.0"
+    - PUPPET_GEM_VERSION="~> 3.7.1"
+notifications:
+  email: false

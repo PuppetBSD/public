@@ -1,0 +1,6 @@
+spec/fixtures
+*.swp
+pkg/
+.ruby-*
+coverage
+vendor/

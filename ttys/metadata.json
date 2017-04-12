@@ -1,0 +1,23 @@
+{
+  "name": "olevole-ttys",
+  "version": "0.1.0",
+  "author": "olevole",
+  "summary": "Manage /etc/ttys file content on FreeBSD platform",
+  "license": "Apache-2.0",
+  "source": "https://github.com/olevole/puppet-ttys",
+  "project_page": "https://github.com/olevole/puppet-ttys",
+  "issues_url": "https://github.com/olevole/puppet-ttys/issues",
+  "operatingsystem_support": [
+    {
+    "operatingsystem":"RedHat",
+    "operatingsystemrelease":[ "5.0", "6.0" ]
+    },
+    {
+    "operatingsystem": "Ubuntu",
+    "operatingsystemrelease": [ "12.04", "10.04", "14.04" ]
+    }
+  ],
+  "dependencies": [
+    { "name": "puppetlabs/stdlib", "version_requirement": ">=2.3.0 <5.0.0" }
+  ]
+}

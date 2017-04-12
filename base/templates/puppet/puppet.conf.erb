@@ -1,0 +1,12 @@
+[agent]
+server = <%= @puppetmaster %>
+pluginsync = true
+show_diff = true
+#reports = log,foreman
+reports = none
+environment = production
+certificate_revocation = false
+
+[main]
+dns_alt_names = puppetmaster01.mobbtech.com
+

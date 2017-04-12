@@ -1,0 +1,33 @@
+# for encrypt value of userPassword, use:
+# % slappasswd -h "{SSHA}" -s yourpassword
+#
+# ldapadd -Z -D "<%= @ldap_bind_id %>" -W -f /root/example_user.ldif
+# or
+# ldapadd -Z -D "<%= @ldap_bind_id %>" -w <%= @ldap_bind_password %> -f /root/example_user.ldif
+
+dn: uid=testuser1,ou=People,<%= @ldap_suffix %>
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: testuser1
+cn: Test Client
+sn: TestClient
+givenName: Test
+displayName: testuser1
+uidNumber: 5001
+gidNumber: 5001
+gecos: testuser1 lastname
+homeDirectory: /home/testuser1
+shadowFlag: 0
+shadowWarning: 7
+shadowMin: 8
+shadowMax: 999999
+mail: testuser1@example.com
+postalCode: 12345
+homePhone: 1235551234
+title: Cool Customer Extraordinare
+postalAddress:
+initials: TC
+loginShell: /bin/csh
+userPassword: {SSHA}XmvaNWG3xfeEKdnamLYQDmD+UNLoulPs

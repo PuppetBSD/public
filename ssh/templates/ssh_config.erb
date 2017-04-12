@@ -1,0 +1,111 @@
+# This file is being maintained by Puppet.
+# DO NOT EDIT
+
+# $OpenBSD: ssh_config,v 1.21 2005/12/06 22:38:27 reyk Exp $
+
+# This is the ssh client system-wide configuration file.  See
+# ssh_config(5) for more information.  This file provides defaults for
+# users, and the values can be changed in per-user configuration files
+# or on the command line.
+
+# Configuration data is parsed as follows:
+#  1. command line options
+#  2. user-specific file
+#  3. system-wide file
+# Any configuration value is only changed the first time it is set.
+# Thus, host-specific definitions should be at the beginning of the
+# configuration file, and defaults at the end.
+
+# Site-wide defaults for some commonly used options.  For a comprehensive
+# list of available options, their meanings and defaults, please see the
+# ssh_config(5) man page.
+
+# Host *
+#   ForwardAgent no
+#   ForwardX11 no
+#   RhostsRSAAuthentication no
+#   RSAAuthentication yes
+   PasswordAuthentication yes
+   PubkeyAuthentication yes
+#   HostbasedAuthentication no
+<% if @ssh_hostbasedauthentication -%>
+   HostbasedAuthentication <%= @ssh_hostbasedauthentication %>
+<% end -%>
+#   BatchMode no
+#   CheckHostIP yes
+#   AddressFamily any
+#   ConnectTimeout 0
+#   StrictHostKeyChecking ask
+<% if @ssh_strict_host_key_checking -%>
+   StrictHostKeyChecking <%= @ssh_strict_host_key_checking %>
+<% end -%>
+#   IdentityFile ~/.ssh/identity
+   IdentityFile ~/.ssh/id_rsa
+   IdentityFile ~/.ssh/id_dsa
+#   Port 22
+   Protocol 2
+#   Cipher 3des
+#   Ciphers aes128-cbc,3des-cbc,blowfish-cbc,cast128-cbc,arcfour,aes192-cbc,aes256-cbc
+<% if @ssh_config_ciphers -%>
+    Ciphers <%= @ssh_config_ciphers.join(',') %>
+<% end -%>
+<% if @ssh_config_kexalgorithms -%>
+    KexAlgorithms <%= @ssh_config_kexalgorithms.join(',') %>
+<% end -%>
+#   EscapeChar ~
+#   Tunnel no
+#   TunnelDevice any:any
+#   PermitLocalCommand no
+#   HashKnownHosts no
+<% if @ssh_config_hash_known_hosts_real != nil -%>
+   HashKnownHosts <%= @ssh_config_hash_known_hosts_real %>
+<% end -%>
+<% if @ssh_config_global_known_hosts_list_real -%>
+   GlobalKnownHostsFile <%= @ssh_config_global_known_hosts_list_real.join(' ') %>
+<% end -%>
+<% if @ssh_config_proxy_command -%>
+   ProxyCommand <%= @ssh_config_proxy_command %>
+<% end -%>
+Host *
+#  GSSAPIAuthentication yes
+  GSSAPIAuthentication <%= @ssh_gssapiauthentication %>
+<% if @ssh_gssapidelegatecredentials != nil -%>
+GSSAPIDelegateCredentials <%= @ssh_gssapidelegatecredentials %>
+<% end -%>
+# If this option is set to yes then remote X11 clients will have full access
+# to the original X11 display. As virtually no X11 client supports the untrusted
+# mode correctly we set this to yes.
+<% if @ssh_config_forward_x11_trusted_real != nil -%>
+  ForwardX11Trusted <%= @ssh_config_forward_x11_trusted_real %>
+<% end -%>
+<% if @ssh_config_forward_agent != nil -%>
+  ForwardAgent <%= @ssh_config_forward_agent %>
+<% end -%>
+<% if @ssh_config_forward_x11 != nil -%>
+  ForwardX11 <%= @ssh_config_forward_x11 %>
+<% end -%>
+<% if (@ssh_config_use_roaming_real == 'yes') or (@ssh_config_use_roaming_real == 'no') -%>
+  UseRoaming <%= @ssh_config_use_roaming_real %>
+<% end -%>
+<% if @ssh_config_server_alive_interval != nil -%>
+  ServerAliveInterval <%= @ssh_config_server_alive_interval %>
+<% end -%>
+<% if @ssh_sendenv_real == true -%>
+# Send locale-related environment variables
+  SendEnv LANG LANGUAGE LC_CTYPE LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_MESSAGES
+  SendEnv LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT
+  SendEnv LC_IDENTIFICATION LC_ALL
+<% if @ssh_config_sendenv_xmodifiers_real == true -%>
+  SendEnv XMODIFIERS
+<% end -%>
+<% end -%>
+<% if @ssh_config_macs -%>
+  MACs <%= @ssh_config_macs.join(',') %>
+<% end -%>
+<% if not @ssh_enable_ssh_keysign.nil? -%>
+# EnableSSHKeysign no
+  EnableSSHKeysign <%= @ssh_enable_ssh_keysign %>
+<% end -%>
+<% if @ssh_config_user_known_hosts_file -%>
+  UserKnownHostsFile <%= @ssh_config_user_known_hosts_file.join(' ') %>
+<% end -%>

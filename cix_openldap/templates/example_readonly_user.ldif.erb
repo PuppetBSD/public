@@ -1,0 +1,17 @@
+# for encrypt value of userPassword, use:
+# % slappasswd -h "{SSHA}" -s yourpassword
+#
+# ldapadd -Z -D "<%= @ldap_bind_id %>" -W -f /root/example_readonly_user.ldif
+# or
+# ldapadd -Z -D "<%= @ldap_bind_id %>" -w <%= @ldap_bind_password %> -f /root/example_readonly_user.ldif
+
+version: 1
+
+# Entry 1: cn=readonly,dc=mobbtech,dc=com
+dn: <%= @ldap_bind_ro_id %>
+cn: readonly
+description: LDAP RO user
+objectclass: simpleSecurityObject
+objectclass: organizationalRole
+objectclass: top
+userpassword: {SSHA}sdOMjGdnyL7ixxQKPu9QPUV1uPfDn6YK

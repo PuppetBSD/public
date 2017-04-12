@@ -1,0 +1,36 @@
+# ldapadd -Z -D "<%= @ldap_bind_id %>" -w <%= @ldap_bind_password %>  -f /root/example.ldif
+#First we'll define our top level domain
+#
+dn: <%= @ldap_suffix %>
+#dc: example
+description: Example, which is the main domain for the LDAP DC
+objectClass: dcObject
+objectClass: organization
+o: Example Domain
+
+## FIRST Level hierarchy - People
+
+dn: ou=People, <%= @ldap_suffix %>
+ou: People
+description: The People Organizational Unit
+objectclass: organizationalunit
+
+## SECOND Level hierarchy - Staff/People
+dn: ou=Staff,ou=People,<%= @ldap_suffix %>
+ou: Staff
+description: The Staff/People Organizational Unit
+objectClass: organizationalUnit
+
+## FIRST Level hierarchy - Computers
+
+dn: ou=Computers, <%= @ldap_suffix %>
+ou: Computers
+description: All customers within the LDAP
+objectclass: organizationalunit
+
+## FIRST Level hierarchy - Roles
+
+dn: ou=Roles, <%= @ldap_suffix %>
+ou: Roles
+description: Non-User User Account OU
+objectclass: organizationalunit

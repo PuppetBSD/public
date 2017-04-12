@@ -1,0 +1,37 @@
+# LDAP Configuration
+URI ldap://<%= @ldap_host %>
+base <%= @ldap_suffix %>
+ldap_version 3
+scope sub
+bind_timelimit 3
+bind_policy soft
+timelimit 3
+idle_timelimit 3
+
+pam_password SSHA
+
+pam_filter              objectclass=posixAccount
+pam_check_host_attr     yes
+pam_login_attribute     uid:caseExactMatch:
+pam_member_attribute    memberUid
+
+pam_lookup_policy no
+
+<% if @ldap_ou -%>
+nss_base_group <%= @ldap_ou %>,<%= @ldap_suffix %>
+nss_base_netgroup <%= @ldap_ou %>,<%= @ldap_suffix %>
+<% else -%>
+nss_base_group <%= @ldap_suffix %>
+nss_base_netgroup <%= @ldap_suffix %>
+<% end -%>
+
+nss_initgroups_ignoreusers root,ldap
+nss_connect_policy oneshot
+
+<% if @ldap_bind_id -%>
+binddn <%= @ldap_bind_id %>
+<% end -%>
+<% if @ldap_bind_password -%>
+bindpw <%= @ldap_bind_password %>
+<% end -%>
+

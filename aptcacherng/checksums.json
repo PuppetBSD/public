@@ -1,0 +1,18 @@
+{
+  "CONTRIBUTORS.md": "47a0b75d3587ac9811ad55dcd071e10b",
+  "Changelog": "58ba474a4c08204debd6faca7386c0a1",
+  "Gemfile": "7d22af84509de53993ff0fabd1ca8a5e",
+  "LICENSE": "3528aa13fb7106a7fcf7b983eb5f30be",
+  "README.md": "503a04d23ba1152ae33cecfb2a4f43a2",
+  "Rakefile": "a5b7abcb5464770b8ee3c8900924782b",
+  "manifests/init.pp": "dac743aef0e6942f2d964e6e153505ce",
+  "manifests/params.pp": "2b5ce855c6558540cdb33e0f364d1d0f",
+  "metadata.json": "2777d4f5b74454fd1b3d48efd38dc18d",
+  "spec/classes/aptcacherng_init_spec.rb": "3da41f4e2c691d6f622e07f8cdce6653",
+  "spec/spec_helper.rb": "4f17ab8c2183b0a8871b7b0a284a15c6",
+  "templates/acng.conf.erb": "8be97f35512bafe879e49f375f9cc700",
+  "templates/apt-cacher-ng_limits.erb": "b5176bc6215d36fa47802f337cb83aad",
+  "templates/security.conf.erb": "037770d319bfd1cd8e46967afbfca3f5",
+  "tests/init.pp": "92f5d13e3d31658bf01b2e86b106a31f",
+  "tests/params.pp": "d41d8cd98f00b204e9800998ecf8427e"
+}

@@ -1,0 +1,32 @@
+#!/bin/sh
+#takes one argument, the username to get the keys for
+
+PATH=$PATH:/usr/local/bin:/usr/local/sbin
+export PATH
+
+if [ -z "${1}" ]; then
+	echo "Give me username"
+	exit 1
+fi
+
+logfile=$( mktemp )
+
+ldapsearch -x -w <%= @ldap_bind_password %> -D <%= @ldap_bind_id %>  -LLL -H ldap://<%= @ldap_host %>/ -b <%= @ldap_suffix %> "(&(objectClass=posixAccount)(uid=${1}))" sshPublicKey 2>${logfile}| sed -e s/\://g -e s/sshPublicKey// -e '/dn cn/d' |while read _x; do
+	# we need split multiple pubkey records, so test for ^ssh-
+	begining=$( echo ${_x} |grep ^ssh- )
+	if [ $? -eq 1 ]; then
+		printf "${_x}"
+	else
+		printf "\n"
+		printf "${_x}"
+	fi
+done
+
+logsize=$( stat -f "%z" ${logfile} )
+
+if [ "${logsize}" != "0" ]; then
+	logger -p auth.info -f ${logfile}
+fi
+
+rm -f ${logfile}
+printf "\n"

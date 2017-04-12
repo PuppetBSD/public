@@ -1,0 +1,1 @@
+git@github.com:olevole/puppet-supervisord.git

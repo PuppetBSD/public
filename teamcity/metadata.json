@@ -1,0 +1,48 @@
+{
+  "name": "flypenguin-teamcity",
+  "version": "0.5.0",
+  "author": "Axel Bock <mr.axel.bock@gmail.com>",
+  "summary": "Module managing JetBrain's TeamCity installation including DB setup. Feedback *greatly* appreciated.",
+  "license": "MIT",
+  "source": "https://github.com/flypenguin/puppet-teamcity",
+  "project_page": "https://github.com/flypenguin/puppet-teamcity",
+  "issues_url": "https://github.com/flypenguin/puppet-teamcity/issues",
+  "tags": [
+    "teamcity",
+    "jetbrains"
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "15.04",
+        "15.10"
+      ]
+    },
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "7.0",
+        "7.1",
+        "7.2"
+      ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "7.0",
+        "7.1",
+        "7.2"
+      ]
+    }
+  ],
+  "data_provider": "hiera",
+  "dependencies": [
+    {"name":"puppetlabs/java","version_requirement":">=0.0.1"},
+    {"name":"puppetlabs/postgresql","version_requirement":">=0.0.1"},
+    {"name":"puppetlabs/stdlib","version_requirement":">=0.0.1"},
+    {"name":"camptocamp/archive","version_requirement":">=0.0.1"},
+    {"name":"camptocamp/systemd","version_requirement":">=0.0.1"},
+    {"name":"maestrodev/wget","version_requirement":">=0.0.1"}
+  ]
+}

@@ -1,0 +1,2 @@
+https://github.com/PuppetBSD/puppet-module-ssh.git
+

@@ -1,0 +1,48 @@
+{
+  "name": "jorhett-mcollective",
+  "version": "1.0.3",
+  "author": "Jo Rhett",
+  "license": "BSD-3-Clause",
+  "summary": "Configures MCollective servers, clients, and middleware brokers; handles networks of brokers, subcollectives, and TLS security options",
+  "source": "https://github.com/jorhett/puppet-mcollective",
+  "project_page": "https://github.com/jorhett/puppet-mcollective",
+  "issues_url": "https://github.com/jorhett/puppet-mcollective/issues",
+  "tags": ["mcollective","activemq"],
+  "operatingsystem_support": [
+    {
+      "operatingsystem":"RedHat",
+      "operatingsystemrelease":[ "6","7" ]
+    },
+    {
+      "operatingsystem":"CentOS",
+      "operatingsystemrelease":[ "6","7" ]
+    },
+    {
+      "operatingsystem":"OracleLinux",
+      "operatingsystemrelease":[ "6","7" ]
+    },
+    {
+      "operatingsystem":"Scientific",
+      "operatingsystemrelease":[ "6","7" ]
+    },
+    {
+      "operatingsystem":"Debian",
+      "operatingsystemrelease":[ "6","7" ]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [ "15.04", "14.10", "14.04", "13.10", "13.04", "12.10", "12.04" ]
+    },
+    {
+      "operatingsystem": "FreeBSD",
+      "operatingsystemrelease": [ "10.1", "10.0", "9.3" ]
+    }
+  ],
+  "requirements": [
+    { "name": "pe", "version_requirement": ">= 3.3.0 <= 5.0.0" },
+    { "name": "puppet", "version_requirement": ">= 3.5.0 <= 5.0.0" }
+  ],
+  "dependencies": [
+    { "name": "puppetlabs/stdlib", "version_requirement": ">= 3.2.0 <= 5.0.0" }
+  ]
+}

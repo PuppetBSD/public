@@ -1,0 +1,61 @@
+#!/bin/sh
+# PROVIDE: rtorrent
+# REQUIRE: LOGIN NETWORKING
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name="rtorrent"
+rcvar=rtorrent_enable
+
+: ${rtorrent_enable="NO"}
+
+PATH=$PATH:/usr/bin:/usr/local/bin:/usr/local/sbin:/sbin:/bin:/usr/sbin
+required_files="/usr/home/web/.rtorrent.rc"
+command="/usr/bin/su"
+command_args="<%= scope['rtorrent::user'] -%> -c '/usr/local/bin/tmux -u new -d -s rtorrent /usr/local/bin/rtorrent'"
+start_precmd="${name}_prestart"
+start_cmd="${name}_start"
+stop_cmd="${name}_stop"
+status_cmd="${name}_status"
+
+pidfile="/var/run/rtorrent"
+
+rtorrent_prestart()
+{
+	rm -f /tmp/rpc.socket
+
+	if [ ! -x /usr/local/bin/rtorrent ]; then
+		warn "/usr/local/bin/rtorrent does not exist."
+		return 1
+	fi
+
+	if [ ! -x /usr/local/bin/rtorrent ]; then
+		warn "/usr/local/bin/tmux does not exist."
+		return 1
+	fi
+}
+
+rtorrent_start()
+{
+	eval "${command} ${command_args}"
+}
+
+rtorrent_stop()
+{
+	pkill rtorrent
+}
+
+rtorrent_status()
+{
+	if pgrep rtorrent; then
+		echo "Running"
+		return 0
+	else
+		echo "Not running"
+		return 1
+	fi
+}
+
+load_rc_config "$name"
+run_rc_command "$1"
